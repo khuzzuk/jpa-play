@@ -1,4 +1,4 @@
-package pl.silvermedia.jpaplay.db;
+package pl.silvermedia.jpaplay.film;
 
 public interface Titled
 {

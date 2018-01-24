@@ -1,26 +1,23 @@
 package pl.silvermedia.jpaplay.service;
 
-import java.util.Collection;
-
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import pl.silvermedia.jpaplay.db.Film;
 import reactor.core.CoreSubscriber;
 import reactor.core.publisher.Mono;
 
 @Component
 @Scope("prototype")
-public class Emitter extends Mono<Collection<Film>>
+public class Emitter<E> extends Mono<E>
 {
-   private CoreSubscriber<? super Collection<Film>> actual;
+   private CoreSubscriber<? super E> actual;
 
    @Override
-   public void subscribe(CoreSubscriber<? super Collection<Film>> actual)
+   public void subscribe(CoreSubscriber<? super E> actual)
    {
       this.actual = actual;
    }
 
-   void provide(Collection<Film> content)
+   public void provide(E content)
    {
       actual.onNext(content);
       actual.onComplete();
